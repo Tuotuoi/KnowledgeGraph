@@ -33,11 +33,13 @@
 
 - 获取代码到本地仓库 （已经添加各位为合作者）
 
-  - git pull git@github.com:Tuotuoi/KnowledgeGraph.git
+  - **第一次**获取远程代码，git clone git@github.com:Tuotuoi/KnowledgeGraph.git
+  - **后续**更新自己代码：git pull master:<你自己的分支名>  //将远程的master分支pull到自己本地，并合并，即更新所有本地代码
 
 - 如何管理分支
 
   - git branch <分支名>     //创建一个分支，名字用自己姓名缩写
+  - git branch                      // 查看分支名称，并看到自己所在的分支	![](D:\照片\笔记\4.PNG)
   - git checkout <分支名>  //切换分支到分支名
   - git merge <分支名>  // 合并分支名的分支到master分支 (此步操作需谨慎，由每天开完会讨论后再合并)
 
@@ -45,8 +47,14 @@
 
   - git add *
   - git commit -m "XXXX_XX_XX"   //格式xxxx为年月日test1
-  - git push
+  - git push                    //push到当前工作的分支
 
+  
+  
+  #### 约定：
+  
+  每人单独创建一个以自己名字缩写的首字母为名称的分支，当日只在自己的分支提交，待第二天早上开会测试没问题后，执行git merge命令合并到master分支，然后所有人执行git pull master:<你自己的分支名>，更新所有本地代码
+  
   
 
 # 2.Web开发（1月-2月5日）
