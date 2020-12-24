@@ -30,14 +30,24 @@
 #### 版本控制
 
 - 采取github托管
-- 本地仓库
-  1. git init
-  2. git config --global user.email "https://github.com/Tuotuoi" 设置网址
-  3. git config --global user.name "Tuotuoi" 设置用户名
-  4. 
-- 如何上传代码
-- 如何获取代码
+
+- 获取代码到本地仓库 （已经添加各位为合作者）
+
+  - git pull git@github.com:Tuotuoi/KnowledgeGraph.git
+
 - 如何管理分支
+
+  - git branch <分支名>     //创建一个分支，名字用自己姓名缩写
+  - git checkout <分支名>  //切换分支到分支名
+  - git merge <分支名>  // 合并分支名的分支到master分支 (此步操作需谨慎，由每天开完会讨论后再合并)
+
+- 如何上传代码
+
+  - git add *
+  - git commit -m "XXXX_XX_XX"   //格式xxxx为年月日test1
+  - git push
+
+  
 
 # 2.Web开发（1月-2月5日）
 
