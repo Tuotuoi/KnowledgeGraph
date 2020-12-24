@@ -47,7 +47,7 @@
 
   - git add *
   - git commit -m "XXXX_XX_XX"   //格式xxxx为年月日test1
-  - git push
+  - git push                    //push到当前工作的分支
 
   
   
