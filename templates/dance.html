@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+{#<script type="text/javascript">#}
+{#    window.onload = function() {//当文档加载完毕时执行本函数#}
+{#        var form = document.getElementById("form1");//获取表单元素对象#}
+{#        form.onsubmit = function() {//给表单元素添加一个监听，监听表单被提交事件#}
+{#            var usernameValue = form.username.value;//获取表单中名为username的表单元素值#}
+{#            if(!usernameValue) {//判断该值是否为空#}
+{#                var usernameSpan = document.getElementById("usernameSpan");//得到usernmae元素后的<span>元素#}
+{#                usernameSpan.innerText = "搜索内容不能为空！";//设置span元素内容！#}
+{#                return false;//返回false，表示拦截了表单提交动作#}
+{#            }#}
+{#            return true;//不拦截表单提交动作#}
+{#        };#}
+{#    };#}
+{#</script>#}
+<head>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+
+  <title>智能问答</title>
+
+  <!-- slider stylesheet -->
+  <link rel="stylesheet" type="text/css"
+    href="/static/css/owl.carousel.min.css" />
+
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.css" />
+
+  <!-- fonts style -->
+  <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,600,700|Roboto:300,400,700&display=swap"
+    rel="stylesheet">
+  <!-- Custom styles for this template -->
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <!-- responsive style -->
+  <link href="/static/css/responsive.css" rel="stylesheet" />
+</head>
+
+
+
+<body class="dance_page">
+
+  <div class="hero_area">
+    <!-- header section strats -->
+    <header class="header_section">
+      <div class="container">
+        <nav class="navbar navbar-expand-lg custom_nav-container pt-3">
+          <a class="navbar-brand" href="#">
+            智能问答
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto mr-2">
+              <li class="nav-item active">
+                <a class="nav-link" href="http://127.0.0.1:8000/KG/index/">首页<span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="http://127.0.0.1:8000/KG/about/">关于团队</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="http://127.0.0.1:8000/KG/home/">智能问答</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="http://127.0.0.1:8000/KG/classes/">知识图谱可视化</a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="http://127.0.0.1:8000/KG/contact/">数据源</a>
+              </li>
+
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+
+              <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit"></button>
+            </form>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <!-- end header section -->
+
+
+    <!-- master section -->
+    <section class="master_section">
+      <h2>
+        基于语义网络的智能问答
+      </h2>
+        <div class="col-md-4 info_news" >
+            <form onsubmit="return false" action="" method="post" id="form1">
+                <input type="search" placeholder="请输入一个关键字(暂时不支持一个以上关键字)" style="margin-top: 0px; margin-left: 500px; width: 450px" name="username" id="username">
+                <span id="usernameSpan"></span>
+                <button type="submit"  value="提交" style="position: absolute;margin-left: 1050px; margin-top: -30px" id="save">
+                  提交
+                </button>
+                <font color="white" >
+                <output class="text" style="position: relative;width: 600px;height: 100px; margin-left: 450px; margin-top: 50px">
+            </font>
+            </form>
+          </div>
+      <div class="master_custom-container">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="master_content-box">
+
+{#              <div class="master_img-box">#}
+{#                <img src="/static/images/master-1.png" alt="">#}
+{#              </div>#}
+{#              <div class="master_detail">#}
+{#                <h4>#}
+{#                  Dance Masters#}
+{##}
+{#                </h4>#}
+{#                <p>#}
+{#                  There are many variations of passages of Lorem Ipsum available, but the#}
+{#                  majority#}
+{#                </p>#}
+{#              </div>#}
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="master_content-box">
+{#              <div class="master_img-box master_img-box-white">#}
+{#                <img src="/static/images/master-2.png" alt="">#}
+{#              </div>#}
+{#              <div class="master_detail">#}
+{#                <h4>#}
+{#                  Music Lessons#}
+{##}
+{#                </h4>#}
+{#                <p>#}
+{#                  There are many variations of passages of Lorem Ipsum available, but the#}
+{#                  majority#}
+{#                </p>#}
+{#              </div>#}
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="master_content-box" style="position: absolute; margin-left: -700px">
+
+              <div class="master_img-box">
+                <img src="/static/images/master-3.png" alt="">
+              </div>
+{#              <div class="master_detail">#}
+{#                <h4>#}
+{#                  Skill Based Coaching#}
+{##}
+{##}
+{#                </h4>#}
+{#                <p>#}
+{#                  There are many variations of passages of Lorem Ipsum available, but the#}
+{#                  majority#}
+{#                </p>#}
+{#              </div>#}
+            </div>
+          </div>
+        </div>
+        <div class="master_section-btn" style="position: relative; margin-top: 300px; margin-left: -900px">
+          <a href="">
+            <div>
+              <span>
+                Read More
+              </span>
+              <span>
+                <img src="/static/images/right.png" alt="" style="width: 18px;">
+              </span>
+            </div>
+          </a>
+        </div>
+      </div>
+
+    </section>
+    <!-- end master section -->
+
+
+    <!-- info section -->
+    <section class="info_section">
+    <div class="container ">
+      <div class="row custom_border-btm mb-3 pb-4">
+        <div class="col-md-4 info_logo">
+          <h2>
+            东北抗联知识图谱
+          </h2>
+          <p>
+            我们致力于打造东北特色的红色革命精神
+          </p>
+        </div>
+        <div class="col-md-4 info_address">
+          <h5>
+            地址
+          </h5>
+          <p>
+            黑龙江省哈尔滨市南岗区145号哈尔滨工程大学
+          </p>
+          <p>
+            (+86) 18846133091
+          </p>
+          <p>
+            m18999624868_1@163.com
+          </p>
+        </div>
+          <div class="col-md-4 info_news">
+            <h5>
+
+            </h5>
+            <form action="">
+              <div>
+                <input type="email" placeholder="Enter your email">
+              </div>
+              <div>
+                <button type="submit">
+                  Subscribe
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="info_nav ">
+        <nav class="custom_border-btm">
+          <ul>
+            <li>
+              <a href="http://127.0.0.1:8000/KG/index/">首页</a>
+            </li>
+            <li>
+              <a href="http://127.0.0.1:8000/KG/about/">关于团队</a>
+            </li>
+            <li>
+              <a href="http://127.0.0.1:8000/KG/home/">智能问答</a>
+            </li>
+            <li>
+              <a href="http://127.0.0.1:8000/KG/classes">知识图谱可视化</a>
+            </li>
+
+            <li>
+              <a href="http://127.0.0.1:8000/KG/contact/">数据源</a>
+            </li>
+          </ul>
+          </nav>
+        </div>
+        <div>
+          <div class="info_social">
+            <div>
+              <img src="/static/images/fb.png" alt="">
+            </div>
+            <div>
+              <img src="/static/images/twitter.png" alt="">
+            </div>
+            <div>
+              <img src="/static/images/linkedin.png" alt="">
+            </div>
+            <div>
+              <img src="/static/images/insta.png" alt="">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- endsss info section -->
+
+
+
+    <!-- footer section -->
+    <section class="container-fluid footer_section">
+    <p>哈尔滨工程大学普通型立项项目作品</p>
+  </section>
+    <!-- footer section -->
+
+{#    <script type="text/javascript" src="/static/js/jquery-3.4.1.min.js"></script>#}
+{#    <script type="text/javascript" src="/static/js/bootstrap.js"></script>#}
+      <script src="http://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+{#    <script type="text/javascript" src="/static/js/bootstrap.js"></script>#}
+      <script src="https://rawgit.com/neo4j-contrib/neovis.js/master/dist/neovis.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+      <script src="https://cdn.neo4jlabs.com/neovis.js/v1.4.0/neovis.js"></script>
+      <script src="https://rawgit.com/neo4j-contrib/neovis.js/master/dist/neovis.js"></script>
+    <script src="http://cdn.bootcdn.net/ajax/libs/echarts/4.8.0/echarts.min.js"></script>
+    <!-- slider stylesheet -->
+
+
+
+
+</body>
+{#<script>#}
+{#    function AjaxSubmit() {#}
+{#        window.onload = function() {//当文档加载完毕时执行本函数#}
+{#        var form = document.getElementById("form1");//获取表单元素对象#}
+{#        form.onsubmit = function() {//给表单元素添加一个监听，监听表单被提交事件#}
+{#            var search = form.username.value;//获取表单中名为username的表单元素值#}
+{#            $.ajax({#}
+{#                url: '/KG/home1/',#}
+{#                type: 'POST',#}
+{#                data: {search: search},#}
+{#                success: function (result) {#}
+{#                    console.log(result.data);#}
+{#                }#}
+{#            });#}
+{##}
+{#    }#}
+{#        }#}
+{#    }#}
+{##}
+{##}
+{#</script>#}
+<script type="text/javascript">
+    $(document).ready(function(){
+     $("#save").click(function(){
+     $.ajax({
+         url:"/KG/home1/",
+         type: "POST",
+         dataType: "json",
+         data:{"name": $("#username").val(),
+         },
+         success:function(data){
+            console.log(data);
+            {#console.log(data.status);  #}
+            {#console.log(data.message);    #}
+            $(".text").text(data);
+        },
+     });
+     });
+    });
+    </script>
+</html>

@@ -1,0 +1,4 @@
+sub_army_id:ID(sub_army_id),sub_army_name,:LABEL
+1,"东北抗日联军第一路军",sub_army
+2,"东北抗日联军第二路军",sub_army
+3,"东北抗日联军第三路军",sub_army

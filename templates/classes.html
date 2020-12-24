@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+
+  <title>知识图谱可视化</title>
+    <script src="http://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+{#    <script type="text/javascript" src="/static/js/bootstrap.js"></script>#}
+      <script src="https://rawgit.com/neo4j-contrib/neovis.js/master/dist/neovis.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+      <script src="https://cdn.neo4jlabs.com/neovis.js/v1.4.0/neovis.js"></script>
+      <script src="https://rawgit.com/neo4j-contrib/neovis.js/master/dist/neovis.js"></script>
+    <script src="http://cdn.bootcdn.net/ajax/libs/echarts/4.8.0/echarts.min.js"></script>
+    <!-- slider stylesheet -->
+  <link rel="stylesheet" type="text/css"
+    href="/static/css/owl.carousel.min.css" />
+
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.css" />
+
+  <!-- fonts style -->
+  <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,600,700|Roboto:300,400,700&display=swap"
+    rel="stylesheet">
+  <!-- Custom styles for this template -->
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <!-- responsive style -->
+  <link href="/static/css/responsive.css" rel="stylesheet" />
+</head>
+
+<body>
+
+
+  <div class="hero_area">
+    <!-- header section strats -->
+    <header class="header_section">
+      <div class="container">
+        <nav class="navbar navbar-expand-lg custom_nav-container pt-3">
+          <a class="navbar-brand" href="#">
+            知识图谱可视化
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto mr-2">
+              <li class="nav-item active">
+                <a class="nav-link" href="http://127.0.0.1:8000/KG/index/">首页<span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="http://127.0.0.1:8000/KG/about/">关于团队</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="http://127.0.0.1:8000/KG/home/">智能问答</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="http://127.0.0.1:8000/KG/classes/">知识图谱可视化</a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="http://127.0.0.1:8000/KG/contact/">数据源</a>
+              </li>
+
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+
+              <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit"></button>
+            </form>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <!-- end header section -->
+
+
+
+
+    <!-- class section -->
+      <div class="col-md-4 info_news" >
+            <h5>
+            </h5>
+            <form action="">
+              <div class="box" >
+                <input type="search" placeholder="请输入查询内容" style="margin-top: 100px; margin-left: 600px">
+              </div>
+              <div>
+                <button type="button" style="position: absolute;margin-left: 1000px; margin-top: -30px">
+                  提交
+                </button>
+              </div>
+            </form>
+          </div>
+      <div class="box" style="background-color: white; width: 800px; height: 300px; position: relative; margin-left: 300px; margin-top: 55px">
+
+        <style type="text/css">
+            html, body {
+                font: 16pt arial;
+            }
+            #viz {
+                width: 900px;
+                height: 500px;
+                border: 1px solid lightgray;
+                font: 22pt arial;
+            }
+        </style>
+          <div id="main" style="width:1000px;height:800px"></div>
+<script type="text/javascript">
+    var myChart = echarts.init(document.getElementById('main'));
+    var categories = [];
+    var person_name = [];
+    var person_id = [];
+    var army_name = [];
+    var army_id = [];
+    var relative = [];
+    var rank_id = [];
+    var rank_name = [];
+    var datas = [];
+     $.ajax({
+        type:"get",
+        url:'/KG/search/',
+        dataType:'json',
+        async:true,
+        cache:false,
+
+        success:function(result){
+
+            var arr = result.data;
+            for (var i = 0; i < 20; i++) {
+                console.log(arr[i][2]);
+                person_name[i] = arr[i][0].person_name;
+                person_id[i] = arr[i][0].person_id;
+                army_name[i] = arr[i][2].army_name;
+                army_id[i] = arr[i][2].army_id;
+            }
+            console.log(person_name);
+
+
+
+
+
+        },
+
+    });
+    for (var i = 0; i < 2; i++) {
+        categories[i] = {
+            name: '类目' + i
+        };
+    }
+    option = {
+        // 图的标题
+        title: {
+            text: '东北抗联知识图谱 关系图'
+        },
+        // 提示框的配置
+        tooltip: {
+            formatter: function (x) {
+                return x.data.des;
+            }
+        },
+        // 工具箱
+        toolbox: {
+            // 显示工具箱
+            show: true,
+            feature: {
+                mark: {
+                    show: true
+                },
+                // 还原
+                restore: {
+                    show: true
+                },
+                // 保存为图片
+                saveAsImage: {
+                    show: true
+                }
+            }
+        },
+        legend: [{
+            // selectedMode: 'single',
+            data: categories.map(function (a) {
+                return a.name;
+            })
+        }],
+        series: [{
+            type: 'graph', // 类型:关系图
+            layout: 'force', //图的布局，类型为力导图
+            symbolSize: 40, // 调整节点的大小
+            roam: true, // 是否开启鼠标缩放和平移漫游。默认不开启。如果只想要开启缩放或者平移,可以设置成 'scale' 或者 'move'。设置成 true 为都开启
+            edgeSymbol: ['circle', 'arrow'],
+            edgeSymbolSize: [2, 10],
+            edgeLabel: {
+                normal: {
+                    textStyle: {
+                        fontSize: 20
+                    }
+                }
+            },
+            force: {
+                repulsion: 2500,
+                edgeLength: [10, 50]
+            },
+            draggable: true,
+            lineStyle: {
+                normal: {
+                    width: 2,
+                    color: '#4b565b',
+                }
+            },
+            edgeLabel: {
+                normal: {
+                    show: true,
+                    formatter: function (x) {
+                        return x.data.name;
+                    }
+                }
+            },
+            label: {
+                normal: {
+                    show: true,
+                    textStyle: {}
+                }
+            },
+
+            // 数据
+            data: [{
+                name: person_name,
+                des: person_name,
+                symbolSize: 70,
+                category: 0,
+            },
+
+                {
+                name: '王德泰',
+                des: '王德泰',
+                symbolSize: 70,
+                category: 0,
+            },
+
+                {
+                name: '赵尚志',
+                des: '赵尚志',
+                symbolSize: 70,
+                category: 0,
+            },
+
+                {
+                name: '李延禄',
+                des: '李延禄',
+                symbolSize: 70,
+                category: 0,
+            },
+
+                {
+                name: '周保中',
+                des: '周保中',
+                symbolSize: 70,
+                category: 0,
+            },
+
+                {
+                name: '夏云杰',
+                des: '夏云杰',
+                symbolSize: 70,
+                category: 0,
+            },
+                {
+                name: "陈荣久",
+                des: "陈荣久",
+                symbolSize: 70,
+                category: 0,
+            },
+                {
+                name: "谢文东",
+                des: "谢文东",
+                symbolSize: 70,
+                category: 0,
+            },
+                {
+                name:"李熙山",
+                des: "李熙山",
+                symbolSize: 70,
+                category: 0,
+            },
+                {
+                name: "汪雅臣",
+                des: "汪雅臣",
+                symbolSize: 70,
+                category: 0,
+            },
+                {
+                name: "祁致中",
+                des: "祁致中",
+                symbolSize: 70,
+                category: 0,
+            },
+                {
+                name: "李兆麟",
+                des: "李兆麟",
+                symbolSize: 70,
+                category: 0,
+            },
+
+                {
+                name: "东北抗日联军第一路军",
+                des: "东北抗日联军第一路军",
+                symbolSize: 50,
+                category: 1,
+            },
+                {
+                name: "东北抗日联军第一军",
+                des: "东北抗日联军第一军",
+                symbolSize: 50,
+                category: 1,
+            },
+                {
+                name: "东北人民革命军第一军",
+                des: "东北人民革命军第一军",
+                symbolSize: 50,
+                category: 1,
+            },
+                {
+                name: "东北抗日联军第二军",
+                des: "东北抗日联军第二军",
+                symbolSize: 50,
+                category: 1,
+            },
+                {
+                name: "东北人民革命军第二军",
+                des: "东北人民革命军第二军",
+                symbolSize: 50,
+                category: 1,
+            },
+                {
+                name: "东北抗日联军第三军",
+                des: "东北抗日联军第三军",
+                symbolSize: 50,
+                category: 1,
+            },
+                {
+                name: "东北人民革命军第三军",
+                des: "东北人民革命军第三军",
+                symbolSize: 50,
+                category: 1,
+            },
+                {
+                name: "东北抗日联军第四军",
+                des: "东北抗日联军第四军",
+                symbolSize: 50,
+                category: 1,
+            },
+                {
+                name: "东北抗日同盟军第四军",
+                des: "东北抗日同盟军第四军",
+                symbolSize: 50,
+                category: 1,
+            },
+                {
+                name: "东北抗日联军第二路军",
+                des: "东北抗日联军第二路军",
+                symbolSize: 50,
+                category: 1,
+            },
+                {
+                name: "东北抗日联军第五军",
+                des: "东北抗日联军第五军",
+                symbolSize: 50,
+                category: 1,
+            },
+                {
+                name: "东北反日联合军第五军",
+                des: "东北反日联合军第五军",
+                symbolSize: 50,
+                category: 1,
+            },
+                {
+                name: "东北抗日联军第六军",
+                des: "东北抗日联军第六军",
+                symbolSize: 50,
+                category: 1,
+            },
+                {
+                name: "东北人民革命军第六军",
+                des: "东北人民革命军第六军",
+                symbolSize: 50,
+                category: 1,
+            },
+                {
+                name: "东北抗日联军第七军",
+                des: "东北抗日联军第七军",
+                symbolSize: 50,
+                category: 1,
+            },
+                {
+                name: "东北抗日联军第八军",
+                des: "东北抗日联军第八军",
+                symbolSize: 50,
+                category: 1,
+            },
+                {
+                name: "东北抗日联军第九军",
+                des: "东北抗日联军第九军",
+                symbolSize: 50,
+                category: 1,
+            },
+                {
+                name: "东北抗日联军第十军",
+                des: "东北抗日联军第十军",
+                symbolSize: 50,
+                category: 1,
+            },
+                {
+                name: "东北抗日联军第十一军",
+                des: "东北抗日联军第十一军",
+                symbolSize: 50,
+                category: 1,
+            },
+                {
+                name: "东北抗日联军第十二军",
+                des: "东北抗日联军第十二军",
+                symbolSize: 50,
+                category: 1,
+            },
+
+
+            ],
+            links: [{
+                source: '杨靖宇',
+                target: "东北抗日联军第一路军",
+                name: 'manage',
+                des: 'manage'
+            },
+                {
+                source: '杨靖宇',
+                target: "东北抗日联军第一军",
+                name: 'manage',
+                des: 'manage'
+            },
+                {
+                source: '杨靖宇',
+                target: "东北人民革命军第一军",
+                name: 'manage',
+                des: 'manage'
+            },
+                {
+                source: '王德泰',
+                target: "东北抗日联军第二军",
+                name: 'manage',
+                des: 'manage'
+            },
+                {
+                source: '王德泰',
+                target: "东北人民革命军第二军",
+                name: 'manage',
+                des: 'manage'
+            },
+                {
+                source: "赵尚志",
+                target: "东北抗日联军第三军",
+                name: 'manage',
+                des: 'manage'
+            },
+                {
+                source: "赵尚志",
+                target: "东北人民革命军第三军",
+                name: 'manage',
+                des: 'link06des'
+            },
+                {
+                source:'李延禄' ,
+                target: "东北抗日联军第四军",
+                name: 'manage',
+                des: 'link07des'
+            },
+                {
+                source: '李延禄',
+                target: "东北抗日同盟军第四军",
+                name: 'manage',
+                des: 'link08des'
+            },
+                {
+                source: "周保中",
+                target: "东北抗日联军第二路军",
+                name: 'manage',
+                des: 'link09des'
+            },
+                {
+                source: "周保中",
+                target: "东北抗日联军第五军",
+                name: 'manage',
+                des: 'link10des'
+            },
+                {
+                source: "周保中",
+                target: "东北反日联合军第五军",
+                name: 'manage',
+                des: 'link11des'
+            },
+                {
+                source: "夏云杰",
+                target: "东北抗日联军第六军",
+                name: 'manage',
+                des: 'link12des'
+            },
+                {
+                source: "夏云杰",
+                target: "东北人民革命军第六军",
+                name: 'manage',
+                des: 'link13des'
+            },
+                {
+                source: "陈荣久",
+                target: "东北抗日联军第七军",
+                name: 'manage',
+                des: 'link14des'
+            },
+                {
+                source: "谢文东",
+                target: "东北抗日联军第八军",
+                name: 'manage',
+                des: 'link15des'
+            },
+                {
+                source: "李熙山",
+                target: "东北抗日联军第九军",
+                name: 'manage',
+                des: 'link16des'
+            },
+                {
+                source: "汪雅臣",
+                target: "东北抗日联军第十军",
+                name: 'manage',
+                des: 'link17des'
+            },
+                {
+                source: "李兆麟",
+                target: "东北抗日联军第十一军",
+                name: 'manage',
+                des: 'link18des'
+            },
+                {
+                source: "祁致中",
+                target: "东北抗日联军第十军",
+                name: 'manage',
+                des: 'link19des'
+            },
+
+            ],
+            categories: categories,
+        }]
+    };
+    myChart.setOption(option);
+</script>
+      </div>
+    <section class="class_section py-5 my-5" style="position: absolute; margin-left: 200px;margin-top: 500px">
+      <div style="position: absolute; margin-left: 200px;margin-top: 500px">
+          <h2>
+        可视化窗口 <br>
+          </h2>
+
+      </div>
+
+        <h1>
+
+        </h1>
+{#      <div class="container  pb-5 ">#}
+{#        <div class="d-flex justify-content-between flex-wrap">#}
+{#          <div class="mt-4 mx-auto mx-sm-0 mt-lg-0">#}
+{#            <div class="class_img-box box-img-1">#}
+{#              <a href="">#}
+{#                Hip Hop Dance#}
+{#              </a>#}
+{#            </div>#}
+{#          </div>#}
+{#          <div class="mt-4 mx-auto mx-sm-0 mt-lg-0">#}
+{#            <div class="class_img-box box-img-2">#}
+{#              <a href="">#}
+{#                Ballet Dance#}
+{#              </a>#}
+{#            </div>#}
+{#          </div>#}
+{#          <div class="mt-4 mx-auto mx-sm-0 mt-lg-0">#}
+{#            <div class="class_img-box box-img-3">#}
+{#              <a href="">#}
+{#                Break Dance#}
+{#              </a>#}
+{#            </div>#}
+{#          </div>#}
+{#          <div class="mt-4 mx-auto mx-sm-0 mt-lg-0">#}
+{#            <div class="class_img-box box-img-4">#}
+{#              <a href="">#}
+{#                Salsa Dance#}
+{#              </a>#}
+{#            </div>#}
+{#          </div>#}
+{#        </div>#}
+{#      </div>#}
+        <div class="bg-dark">
+
+        </div>
+      <div class="class_section-btn" style="position: absolute; margin-top: -50px; margin-left: 1050px">
+        <a href="">
+          <div >
+            <span>
+              Read More
+            </span>
+            <span>
+              <img src="/static/images/red-next.png" alt="" style="width: 18px;">
+            </span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+      <section class="class_section py-5 my-5">
+{#      <div class="container  pb-5 ">#}
+{#        <div class="d-flex justify-content-between flex-wrap">#}
+{#          <div class="mt-4 mx-auto mx-sm-0 mt-lg-0">#}
+{#            <div class="class_img-box box-img-1">#}
+{#              <a href="">#}
+{#                Hip Hop Dance#}
+{#              </a>#}
+{#            </div>#}
+{#          </div>#}
+{#          <div class="mt-4 mx-auto mx-sm-0 mt-lg-0">#}
+{#            <div class="class_img-box box-img-2">#}
+{#              <a href="">#}
+{#                Ballet Dance#}
+{#              </a>#}
+{#            </div>#}
+{#          </div>#}
+{#          <div class="mt-4 mx-auto mx-sm-0 mt-lg-0">#}
+{#            <div class="class_img-box box-img-3">#}
+{#              <a href="">#}
+{#                Break Dance#}
+{#              </a>#}
+{#            </div>#}
+{#          </div>#}
+{#          <div class="mt-4 mx-auto mx-sm-0 mt-lg-0">#}
+{#            <div class="class_img-box box-img-4">#}
+{#              <a href="">#}
+{#                Salsa Dance#}
+{#              </a>#}
+{#            </div>#}
+{#          </div>#}
+{#        </div>#}
+{#      </div>#}
+        <div class="bg-dark">
+
+        </div>
+      <div class="">
+        <a href="">
+          <div >
+            <span>
+
+            </span>
+            <span>
+              <img src="" alt="" style="width: 18px;">
+            </span>
+          </div>
+        </a>
+      </div>
+    </section>
+    <!-- end class section -->
+
+
+
+    <!-- info section -->
+   <section class="info_section">
+    <div class="container ">
+      <div class="row custom_border-btm mb-3 pb-4">
+        <div class="col-md-4 info_logo">
+          <h2>
+            东北抗联知识图谱
+          </h2>
+          <p>
+            我们致力于打造东北特色的红色革命精神
+          </p>
+        </div>
+        <div class="col-md-4 info_address">
+          <h5>
+            地址
+          </h5>
+          <p>
+            黑龙江省哈尔滨市南岗区145号哈尔滨工程大学
+          </p>
+          <p>
+            (+86) 18846133091
+          </p>
+          <p>
+            m18999624868_1@163.com
+          </p>
+        </div>
+          <div class="col-md-4 info_news">
+            <h5>
+            </h5>
+            <form action="">
+              <div>
+                <input type="email" placeholder="Enter your email">
+              </div>
+              <div>
+                <button type="submit">
+                  Subscribe
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="info_nav ">
+        <nav class="custom_border-btm">
+          <ul>
+            <li>
+              <a href="http://127.0.0.1:8000/KG/index/">首页</a>
+            </li>
+            <li>
+              <a href="http://127.0.0.1:8000/KG/about/">关于团队</a>
+            </li>
+            <li>
+              <a href="http://127.0.0.1:8000/KG/home/">智能问答</a>
+            </li>
+            <li>
+              <a href="http://127.0.0.1:8000/KG/classes">知识图谱可视化</a>
+            </li>
+
+            <li>
+              <a href="http://127.0.0.1:8000/KG/contact/">数据源</a>
+            </li>
+          </ul>
+          </nav>
+        </div>
+        <div>
+          <div class="info_social">
+            <div>
+              <img src="/static/images/fb.png" alt="">
+            </div>
+            <div>
+              <img src="/static/images/twitter.png" alt="">
+            </div>
+            <div>
+              <img src="/static/images/linkedin.png" alt="">
+            </div>
+            <div>
+              <img src="/static/images/insta.png" alt="">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- endsss info section -->
+
+
+
+    <!-- footer section -->
+    <section class="container-fluid footer_section">
+    <p>哈尔滨工程大学普通型立项项目作品</p>
+  </section>
+    <!-- footer section -->
+
+
+</body>
+
+{#<script type="text/javascript">#}
+{##}
+{#        var viz;#}
+{##}
+{#        function draw() {#}
+{#            var config = {#}
+{#                container_id: "viz",#}
+{#                server_url: "http://localhost:7474",#}
+{#                server_user: "neo4j",#}
+{#                server_password: "582460",#}
+{#                labels: {#}
+{#                    "army": {#}
+{#                        "id": "army_id",#}
+{#                        "name": "army_name",#}
+{#                    },#}
+{#                    "person": {#}
+{#                        "id": "person_id",#}
+{#                        "name": "person_name",#}
+{#                    }#}
+{#                },#}
+{#                relationships: {#}
+{#                    "manage":{}#}
+{#                },#}
+{#                initial_cypher: "MATCH (n:person)-[r:manage]->(m:army) RETURN *"#}
+{#            };#}
+{##}
+{#            viz = new NeoVis.default(config);#}
+{#            viz.render();#}
+{#        }#}
+{#    </script>#}
+<script>
+
+
+</script>
+</html>

@@ -1,0 +1,12 @@
+:START_ID(person_id),:END_ID(rank_id),:TYPE
+5,7,person_rank
+20,2,person_rank
+3,3,person_rank
+4,2,person_rank
+6,5,person_rank
+13,2,person_rank
+14,4,person_rank
+15,5,person_rank
+16,2,person_rank
+17,4,person_rank
+20,4,person_rank
